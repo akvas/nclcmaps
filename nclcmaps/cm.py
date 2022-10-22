@@ -39,11 +39,18 @@ def get_cmap(name, force_linear=False):
     with tarfile.open(pkg_resources.resource_filename('nclcmaps', 'data/ncl_colormaps.tar')) as f:
         file_names = f.getnames()
         for file_name in file_names:
-            cmap_name = os.path.splitext(os.path.split(file_name)[-1])[-2]
+            root, _ = os.path.splitext(file_name)
+            cmap_name = os.path.split(root)[-1]
             if name.lower() == cmap_name.lower():
+                target_file_name = None
+                for ext in ('.ncmap', '.rgb', '.gp'):
+                    target_file_name = root + ext
+                    if target_file_name in file_names:
+                        break
+
                 is_unnormalized = False
                 rgb = []
-                for line in f.extractfile(file_name).readlines():
+                for line in f.extractfile(target_file_name).readlines():
                     try:
                         color = tuple(float(v) for v in line.split()[0:3])
                     except ValueError:
@@ -80,10 +87,10 @@ def colormaps():
     """
     colormap_list = []
     with tarfile.open(pkg_resources.resource_filename('nclcmaps', 'data/ncl_colormaps.tar')) as f:
-        file_names = f.getnames()
-        for file_name in file_names:
-            cmap_name = os.path.splitext(os.path.split(file_name)[-1])[-2]
-            if not cmap_name.startswith('.'):
+        for file_name in f.getnames():
+            root, _ = os.path.splitext(file_name)
+            cmap_name = os.path.split(root)[-1]
+            if not cmap_name.startswith('.') and not cmap_name in colormap_list:
                 colormap_list.append(cmap_name)
 
     return colormap_list

@@ -1,3 +1,6 @@
+# Copyright (c) 2022 Andreas Kvas
+# See LICENSE for copyright/license details.
+
 import nclcmaps
 import matplotlib.pyplot as plt
 import numpy as np

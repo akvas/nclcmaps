@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Andreas Kvas
+# Copyright (c) 2021-2022 Andreas Kvas
 # See LICENSE for copyright/license details.
 
 """

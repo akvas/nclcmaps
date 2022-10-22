@@ -36,5 +36,5 @@ All currently supported colormaps can be listed by
 License
 -------
 
-grates a free Open Source software released under MIT license.
+nclcmaps a free Open Source software released under MIT license.
 See [License](LICENSE) for details.
